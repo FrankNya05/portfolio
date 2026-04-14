@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=DM+Mono:wght@300;400;500&family=Syne:wght@600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─────────────────────────────────────────────────────────────
+   Custom Properties — Design Tokens
+   ───────────────────────────────────────────────────────────── */
+:root {
+  --font-sans:    'DM Sans', system-ui, sans-serif;
+  --font-mono:    'DM Mono', 'Consolas', monospace;
+  --font-display: 'Syne', 'DM Sans', sans-serif;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Base Styles
+   ───────────────────────────────────────────────────────────── */
+@layer base {
+  html {
+    @apply scroll-smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-graphite-950 text-graphite-200;
+    font-family: var(--font-sans);
+  }
+
+  /* Selection */
+  ::selection {
+    @apply bg-brass-400/20 text-brass-200;
+  }
+
+  /* Focus visible — accessible, clean */
+  :focus-visible {
+    @apply outline-none ring-2 ring-brass-400/50 ring-offset-2 ring-offset-graphite-950;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-graphite-900;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-graphite-700 rounded-full;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-graphite-600;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Typography
+   ───────────────────────────────────────────────────────────── */
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    @apply text-graphite-100;
+  }
+
+  code, pre, .font-mono {
+    font-family: var(--font-mono);
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Utility Classes
+   ───────────────────────────────────────────────────────────── */
+@layer utilities {
+  /* Technical grid background */
+  .bg-technical-grid {
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  .bg-technical-grid-fine {
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.012) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.012) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  /* Brass accent line */
+  .accent-line-left {
+    @apply border-l-2 border-brass-500/60 pl-4;
+  }
+
+  /* Section divider */
+  .section-divider {
+    @apply border-t border-graphite-800;
+  }
+
+  /* Mono label */
+  .mono-label {
+    @apply font-mono text-2xs text-brass-400 tracking-[0.2em] uppercase;
+  }
+
+  /* Panel — bordered card */
+  .panel {
+    @apply bg-graphite-900 border border-graphite-800 rounded-none;
+  }
+
+  /* Corner mark — engineering bracket accent */
+  .corner-mark::before {
+    content: '';
+    @apply absolute top-0 left-0 w-3 h-3 border-t border-l border-brass-500/40;
+  }
+  .corner-mark::after {
+    content: '';
+    @apply absolute bottom-0 right-0 w-3 h-3 border-b border-r border-brass-500/40;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Reduced Motion
+   ───────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
