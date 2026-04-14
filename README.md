@@ -1,8 +1,6 @@
 # portfolio
 
-Voici le README **pur Markdown**, prêt à copier-coller dans ton fichier `README.md` 👇
 
-````markdown
 # 🚀 Frank Armand — Technical Portfolio
 
 A modern, engineering-oriented portfolio showcasing my work in embedded systems, robotics, digital architecture and intelligent systems.
