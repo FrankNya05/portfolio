@@ -1,6 +1,3 @@
-# portfolio
-
-
 # 🚀 Frank Armand — Technical Portfolio
 
 A modern, engineering-oriented portfolio showcasing my work in embedded systems, robotics, digital architecture and intelligent systems.
