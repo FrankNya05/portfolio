@@ -6,7 +6,7 @@ import { Tag } from "@/components/ui/Tag";
 import { Reveal } from "@/components/motion";
 
 interface PageProps {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 export async function generateStaticParams() {
@@ -14,15 +14,20 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const project = getProjectBySlug(params.slug);
-  if (!project) return { title: "Project Not Found" };
+  const { slug } = await params;
+  const project = getProjectBySlug(slug);
+
+  if (!project) {
+    return { title: "Project Not Found" };
+  }
+
   return {
     title: project.title,
     description: project.summary,
   };
 }
 
-const sectionOrder: Array<{ key: keyof typeof sectionLabels; label: string }> = [
+const sectionOrder = [
   { key: "context", label: "Context" },
   { key: "objective", label: "Objective" },
   { key: "contribution", label: "My Contribution" },
@@ -30,27 +35,19 @@ const sectionOrder: Array<{ key: keyof typeof sectionLabels; label: string }> = 
   { key: "challenges", label: "Challenges" },
   { key: "results", label: "Results & Validation" },
   { key: "learnings", label: "What I Learned" },
-];
+] as const;
 
-const sectionLabels = {
-  context: "",
-  objective: "",
-  contribution: "",
-  architecture: "",
-  stack: "",
-  challenges: "",
-  results: "",
-  learnings: "",
-};
+export default async function ProjectDetailPage({ params }: PageProps) {
+  const { slug } = await params;
+  const project = getProjectBySlug(slug);
 
-export default function ProjectDetailPage({ params }: PageProps) {
-  const project = getProjectBySlug(params.slug);
-  if (!project) notFound();
+  if (!project) {
+    notFound();
+  }
 
   return (
     <div className="min-h-screen bg-graphite-950 pt-24 pb-24">
       <div className="max-w-4xl mx-auto px-6">
-        {/* Back link */}
         <Reveal>
           <Link
             href="/projects"
@@ -60,7 +57,6 @@ export default function ProjectDetailPage({ params }: PageProps) {
           </Link>
         </Reveal>
 
-        {/* Header */}
         <Reveal delay={0.05}>
           <div className="border-b border-graphite-800 pb-10 mb-12">
             <div className="flex flex-wrap items-center gap-3 mb-5">
@@ -81,7 +77,6 @@ export default function ProjectDetailPage({ params }: PageProps) {
               {project.summary}
             </p>
 
-            {/* Tags */}
             <div className="flex flex-wrap gap-2">
               {project.tags.map((tag) => (
                 <Tag key={tag} label={tag} size="md" />
@@ -90,7 +85,6 @@ export default function ProjectDetailPage({ params }: PageProps) {
           </div>
         </Reveal>
 
-        {/* Tech stack callout */}
         <Reveal delay={0.1}>
           <div className="bg-graphite-900 border border-graphite-800 p-6 mb-12">
             <p className="font-mono text-2xs text-brass-400 tracking-[0.2em] uppercase mb-4">
@@ -109,23 +103,20 @@ export default function ProjectDetailPage({ params }: PageProps) {
           </div>
         </Reveal>
 
-        {/* Case study sections */}
         <div className="space-y-12">
           {sectionOrder.map(({ key, label }, i) => {
-            const content = project.sections[key as keyof typeof project.sections];
+            const content = project.sections[key];
             if (!content || typeof content !== "string") return null;
 
             return (
               <Reveal key={key} delay={i * 0.06}>
                 <div className="grid grid-cols-1 md:grid-cols-[140px_1fr] gap-6">
-                  {/* Section label */}
                   <div className="pt-1">
                     <p className="font-mono text-2xs text-graphite-600 tracking-[0.15em] uppercase leading-tight">
                       {label}
                     </p>
                   </div>
 
-                  {/* Section content */}
                   <div className="accent-line-left">
                     <p className="text-graphite-300 text-base leading-relaxed">
                       {content}
@@ -137,7 +128,6 @@ export default function ProjectDetailPage({ params }: PageProps) {
           })}
         </div>
 
-        {/* Optional links */}
         {project.links && project.links.length > 0 && (
           <Reveal delay={0.2} className="mt-16 pt-10 border-t border-graphite-800">
             <p className="mono-label mb-4">Links</p>
@@ -157,7 +147,6 @@ export default function ProjectDetailPage({ params }: PageProps) {
           </Reveal>
         )}
 
-        {/* Bottom nav */}
         <Reveal delay={0.15} className="mt-16 pt-10 border-t border-graphite-800 flex justify-between">
           <Link
             href="/projects"

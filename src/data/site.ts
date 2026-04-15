@@ -18,12 +18,12 @@ export const siteConfig: SiteConfig = {
     },
     {
       label: "GitHub",
-      href: "https://github.com/frankarmand", // replace with actual handle
+      href: "https://github.com/FrankNya05", // replace with actual handle
       type: "github",
     },
     {
       label: "LinkedIn",
-      href: "https://linkedin.com/in/frankarmand", // replace with actual profile
+      href: "https://www.linkedin.com/in/frank-nya-0373a4293/", // replace with actual profile
       type: "linkedin",
     },
   ],
