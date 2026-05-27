@@ -12,8 +12,8 @@ export const siteConfig: SiteConfig = {
   status: "Open to internship opportunities",
   socials: [
     {
-      label: "armandnya44@gmail.com",
-      href: "mailto:armandnya44@gmail.com",
+      label: "franknya.eng@gmail.com",
+      href: "mailto:franknya.eng@gmail.com",
       type: "email",
     },
     {
