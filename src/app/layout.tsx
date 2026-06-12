@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { DM_Sans, DM_Mono, Syne } from "next/font/google";
+import { DM_Sans, IBM_Plex_Mono, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -11,16 +11,16 @@ const dmSans = DM_Sans({
   display: "swap",
 });
 
-const dmMono = DM_Mono({
+const ibmPlexMono = IBM_Plex_Mono({
   subsets: ["latin"],
   weight: ["300", "400", "500"],
   variable: "--font-mono",
   display: "swap",
 });
 
-const syne = Syne({
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
-  weight: ["600", "700", "800"],
+  weight: ["400", "500", "600", "700"],
   variable: "--font-display",
   display: "swap",
 });
@@ -51,7 +51,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${dmSans.variable} ${dmMono.variable} ${syne.variable}`}>
+    <html lang="en" className={`${dmSans.variable} ${ibmPlexMono.variable} ${spaceGrotesk.variable}`}>
       <body className="min-h-screen flex flex-col bg-graphite-950">
         <Navbar />
         <main className="flex-1">{children}</main>

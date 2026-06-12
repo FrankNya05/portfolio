@@ -10,8 +10,34 @@ export function HeroSection() {
       {/* Technical grid background */}
       <div className="absolute inset-0 bg-technical-grid opacity-100 pointer-events-none" />
 
+      {/* Glow orb — brass/gold, above and behind the title */}
+      <div
+        className="absolute pointer-events-none"
+        style={{
+          top: "-25%",
+          left: "15%",
+          width: "900px",
+          height: "900px",
+          background: "radial-gradient(circle, rgba(184,124,10,0.18) 0%, transparent 60%)",
+          filter: "blur(60px)",
+        }}
+      />
+
+      {/* Glow orb — steel blue, bottom-center-left, behind CTA area */}
+      <div
+        className="absolute pointer-events-none"
+        style={{
+          bottom: "-15%",
+          left: "15%",
+          width: "700px",
+          height: "700px",
+          background: "radial-gradient(circle, rgba(37,99,168,0.13) 0%, transparent 60%)",
+          filter: "blur(64px)",
+        }}
+      />
+
       {/* Vignette — darkens edges */}
-      <div className="absolute inset-0 bg-radial-gradient pointer-events-none"
+      <div className="absolute inset-0 pointer-events-none"
         style={{
           background: "radial-gradient(ellipse 80% 60% at 50% 50%, transparent 40%, #0D0E10 100%)"
         }}
